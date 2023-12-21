@@ -1,11 +1,10 @@
 'use strict';
 
 const ipToInt = (ip = '127.0.0.1') => {
-  // Parse ip address as string, for example '10.0.0.1'
-  // to ['10', '0', '0', '1'] to [10, 0, 0, 1]
-  // and convert to Number value 167772161 with bitwise shift
-  // (10 << 8 << 8 << 8) + (0 << 8 << 8) + (0 << 8) + 1 === 167772161
-  // Use Array.prototype.reduce of for loop
+  const arr = ip.split('.').reverse().map((s, i) => parseInt(s) << (i * 8));
+  return arr.reduce((a, c) => a + c, 0);
 };
+
+ipToInt('142.25.547.85');
 
 module.exports = { ipToInt };
